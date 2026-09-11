@@ -3,13 +3,8 @@
     "defaultBase": "origin/main"
   },
   "namedInputs": {
-    "default": [
-      "sharedGlobals",
-      "{projectRoot}/**/*"
-    ],
-    "sharedGlobals": [
-      "{workspaceRoot}/babel.config.json"
-    ],
+    "default": ["sharedGlobals", "{projectRoot}/**/*"],
+    "sharedGlobals": ["{workspaceRoot}/babel.config.json"],
     "production": [
       "default",
       "!{projectRoot}/.eslintrc.json",
@@ -41,18 +36,22 @@
     },
     "build-lib": {
       "options": {
-        "args": [
-          "--verbose"
-        ]
+        "args": ["--verbose"]
       }
     },
     "typecheck": {
       "options": {
-        "args": [
-          "tsconfig.lib.json",
-          "--verbose"
-        ]
+        "args": ["tsconfig.lib.json", "--verbose"]
       }
+    },
+    "@angular/build:application": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
+    },
+    "@angular/build:unit-test": {
+      "cache": true,
+      "inputs": ["default", "^production"]
     }
   },
   "plugins": [
@@ -69,13 +68,8 @@
           "configName": "tsconfig.lib.json"
         }
       },
-      "include": [
-        "libs/**/*"
-      ],
-      "exclude": [
-        "apps/**/*",
-        "apps/*-e2e/**/*"
-      ]
+      "include": ["libs/**/*"],
+      "exclude": ["apps/**/*", "apps/*-e2e/**/*"]
     },
     {
       "plugin": "@nx/playwright/plugin",
@@ -84,5 +78,13 @@
       }
     }
   ],
-  "analytics": false
+  "analytics": false,
+  "generators": {
+    "@nx/angular:application": {
+      "e2eTestRunner": "none",
+      "linter": "eslint",
+      "style": "css",
+      "unitTestRunner": "vitest-angular"
+    }
+  }
 }
