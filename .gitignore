@@ -61,3 +61,7 @@ next-env.d.ts
 
 # TIA (Test Impact Analysis) generated output
 tools/tia/tia-affected.json
+
+# Next.js
+.next
+out

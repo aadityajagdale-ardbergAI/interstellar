@@ -1,0 +1,9 @@
+{
+  "name": "popopo",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/popopo",
+  "projectType": "application",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project popopo --web",
+  "targets": {}
+}
